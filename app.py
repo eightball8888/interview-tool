@@ -84,7 +84,7 @@ if st.session_state.setup_complete and not st.session_state.feedback_shown and n
         icon = "🫴"
     )
 
-    client = OpenAI(api_key = os.environ["OPENAI_API_KEY"])
+    client = OpenAI(api_key = st.secrets["OPENAI_API_KEY"])
 
     if "openai_model" not in st.session_state:
         st.session_state["openai_model"] = "gpt-4o"
@@ -136,7 +136,7 @@ if st.session_state.feedback_shown:
 
     conversation_history = "\n".join([f"{msg['role']}: {msg['content']}" for msg in st.session_state.messages])
 
-    feedback_client = OpenAI(api_key= os.environ["OPENAI_API_KEY"])
+    feedback_client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
     feedback_completion = feedback_client.chat.completions.create(
         model="gpt-4o",
